@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════
+   QUTTR ADMIN — Global Styles
+   ═══════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0a0a0a;
+  }
+
+  body {
+    background: #0a0a0a;
+    color: #ffffff;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2b2b2b;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FFD700;
+  }
+
+  /* Remove input autofill background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+    -webkit-text-fill-color: white !important;
+    caret-color: white;
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(255, 215, 0, 0.3);
+    color: white;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   COMPONENT CLASSES
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* ─── Card ────────────────────────── */
+  .card {
+    @apply bg-gradient-to-br from-dark-400 to-dark-500 
+           border border-white/5 rounded-2xl 
+           shadow-dark-lg backdrop-blur-sm;
+  }
+
+  .card-hover {
+    @apply hover:border-gold-500/30 hover:shadow-glow 
+           transition-all duration-300;
+  }
+
+  /* ─── Buttons ─────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center 
+           px-6 py-3 rounded-xl font-bold text-sm
+           transition-all duration-200 
+           disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+
+  .btn-gold {
+    @apply btn bg-gradient-gold text-dark-900 
+           shadow-gold hover:shadow-gold-lg 
+           focus:ring-gold-500;
+  }
+
+  .btn-red {
+    @apply btn bg-gradient-red text-white 
+           shadow-red hover:shadow-red-lg 
+           focus:ring-secondary-500;
+  }
+
+  .btn-outline {
+    @apply btn border border-white/10 text-white 
+           bg-dark-400 hover:bg-dark-300 
+           focus:ring-white/20;
+  }
+
+  .btn-ghost {
+    @apply btn text-white/70 hover:text-white 
+           hover:bg-white/5 
+           focus:ring-white/10;
+  }
+
+  /* ─── Inputs ──────────────────────── */
+  .input {
+    @apply w-full px-4 py-3 
+           bg-dark-500 border border-white/10 
+           rounded-xl text-white placeholder-white/30 
+           focus:outline-none focus:border-gold-500 
+           focus:ring-2 focus:ring-gold-500/20 
+           transition-all duration-200;
+  }
+
+  .input-error {
+    @apply border-error focus:border-error focus:ring-error/20;
+  }
+
+  /* ─── Labels ──────────────────────── */
+  .label {
+    @apply block text-sm font-semibold text-white/80 mb-2;
+  }
+
+  .label-hint {
+    @apply text-xs text-white/40 mt-1;
+  }
+
+  /* ─── Badges ──────────────────────── */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 
+           rounded-full text-xs font-bold uppercase 
+           tracking-wider;
+  }
+
+  .badge-success {
+    @apply badge bg-success/15 text-success border border-success/30;
+  }
+
+  .badge-error {
+    @apply badge bg-error/15 text-error-light border border-error/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning/15 text-warning-light border border-warning/30;
+  }
+
+  .badge-info {
+    @apply badge bg-info/15 text-info-light border border-info/30;
+  }
+
+  .badge-gold {
+    @apply badge bg-gold-500/15 text-gold-500 border border-gold-500/30;
+  }
+
+  /* ─── Table ───────────────────────── */
+  .table-container {
+    @apply card overflow-hidden;
+  }
+
+  .table {
+    @apply w-full;
+  }
+
+  .table thead {
+    @apply bg-dark-500;
+  }
+
+  .table th {
+    @apply px-6 py-4 text-left text-xs font-bold 
+           text-white/60 uppercase tracking-wider;
+  }
+
+  .table tbody tr {
+    @apply border-t border-white/5 hover:bg-white/[0.02] 
+           transition-colors;
+  }
+
+  .table td {
+    @apply px-6 py-4 text-sm text-white/90;
+  }
+
+  /* ─── Sidebar ─────────────────────── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 
+           rounded-xl text-white/60 
+           hover:text-white hover:bg-white/5 
+           transition-all duration-200;
+  }
+
+  .sidebar-link-active {
+    @apply text-gold-500 bg-gold-500/10 
+           border border-gold-500/20;
+  }
+
+  /* ─── Glass effect ────────────────── */
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl 
+           border border-white/10;
+  }
+
+  /* ─── Gradient text ───────────────── */
+  .text-gradient-gold {
+    @apply bg-gradient-gold bg-clip-text text-transparent;
+  }
+
+  .text-gradient-red {
+    @apply bg-gradient-red bg-clip-text text-transparent;
+  }
+
+  /* ─── Loading states ──────────────── */
+  .skeleton {
+    @apply bg-gradient-to-r from-dark-400 via-dark-300 to-dark-400 
+           bg-[length:200%_100%] animate-shimmer rounded-lg;
+  }
+
+  /* ─── Stat card ───────────────────── */
+  .stat-card {
+    @apply card card-hover p-6 relative overflow-hidden;
+  }
+
+  .stat-value {
+    @apply text-3xl font-black text-white mt-2;
+  }
+
+  .stat-label {
+    @apply text-xs font-bold text-white/50 
+           uppercase tracking-widest;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════ */
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+
+  .border-gradient {
+    border-image: linear-gradient(135deg, #FFD700, #E63946) 1;
+  }
+}
