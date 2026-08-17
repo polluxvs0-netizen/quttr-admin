@@ -38,7 +38,7 @@
     @apply bg-surface-200/50 backdrop-blur-xl border border-white/[0.06] rounded-2xl shadow-elevation-2;
   }
   .card-interactive {
-    @apply card transition-all duration-300 ease-out hover:bg-surface-200/80 hover:border-white/[0.1] hover:shadow-elevation-3 hover:-translate-y-0.5 cursor-pointer;
+    @apply bg-surface-200/50 backdrop-blur-xl border border-white/[0.06] rounded-2xl shadow-elevation-2 transition-all duration-300 ease-out hover:bg-surface-200/80 hover:border-white/[0.1] hover:shadow-elevation-3 cursor-pointer;
   }
   .glass {
     @apply bg-white/[0.02] backdrop-blur-2xl border border-white/[0.06];
@@ -47,28 +47,28 @@
     @apply bg-white/[0.05] backdrop-blur-3xl border border-white/[0.1];
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ease-out disabled:opacity-40 disabled:cursor-not-allowed select-none whitespace-nowrap active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ease-out disabled:opacity-40 disabled:cursor-not-allowed select-none whitespace-nowrap;
   }
   .btn-primary {
-    @apply btn bg-white text-surface-100 hover:bg-white/90 hover:shadow-elevation-2 font-semibold;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-surface-100 hover:bg-white/90 hover:shadow-elevation-2 font-semibold text-sm transition-all duration-200;
   }
   .btn-accent {
-    @apply btn bg-gradient-to-b from-accent-400 to-accent-600 text-surface-100 font-bold shadow-glow-sm hover:shadow-glow-md;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-b from-accent-400 to-accent-600 text-surface-100 font-bold text-sm shadow-glow-sm hover:shadow-glow-md transition-all duration-200;
   }
   .btn-brand {
-    @apply btn bg-gradient-to-b from-brand-500 to-brand-700 text-white font-semibold shadow-brand hover:shadow-brand-lg;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-b from-brand-500 to-brand-700 text-white font-semibold text-sm shadow-brand hover:shadow-brand-lg transition-all duration-200;
   }
   .btn-business {
-    @apply btn bg-gradient-to-b from-business-500 to-business-800 text-white font-semibold shadow-business hover:shadow-business-lg;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-b from-business-500 to-business-800 text-white font-semibold text-sm shadow-business hover:shadow-business-lg transition-all duration-200;
   }
   .btn-ghost {
-    @apply btn text-white/60 hover:text-white hover:bg-white/[0.06];
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-white/60 hover:text-white hover:bg-white/[0.06] font-medium text-sm transition-all duration-200;
   }
   .btn-outline {
-    @apply btn border border-white/10 text-white bg-transparent hover:bg-white/[0.06] hover:border-white/20;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white bg-transparent hover:bg-white/[0.06] hover:border-white/20 font-medium text-sm transition-all duration-200;
   }
   .btn-icon {
-    @apply btn p-2 h-9 w-9 flex-shrink-0;
+    @apply inline-flex items-center justify-center p-2 h-9 w-9 rounded-xl font-medium text-sm text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-200;
   }
   .input {
     @apply w-full px-4 py-3 bg-surface-300/50 border border-white/[0.08] rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-accent-500/50 focus:bg-surface-300/80 focus:ring-4 focus:ring-accent-500/10 transition-all duration-200;
@@ -83,22 +83,22 @@
     @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider;
   }
   .chip-success {
-    @apply chip bg-success/10 text-success border border-success/20;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-success/10 text-success border border-success/20;
   }
   .chip-error {
-    @apply chip bg-error/10 text-error border border-error/20;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-error/10 text-error border border-error/20;
   }
   .chip-warning {
-    @apply chip bg-warning/10 text-warning border border-warning/20;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-warning/10 text-warning border border-warning/20;
   }
   .chip-info {
-    @apply chip bg-info/10 text-info border border-info/20;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-info/10 text-info border border-info/20;
   }
   .chip-accent {
-    @apply chip bg-accent-500/10 text-accent-500 border border-accent-500/20;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-accent-500/10 text-accent-500 border border-accent-500/20;
   }
   .chip-neutral {
-    @apply chip bg-white/5 text-white/60 border border-white/10;
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-2xs font-semibold uppercase tracking-wider bg-white/5 text-white/60 border border-white/10;
   }
   .nav-link {
     @apply flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150;
@@ -107,7 +107,7 @@
     @apply text-white bg-white/[0.08] shadow-inset-border;
   }
   .stat-card {
-    @apply card p-6 relative overflow-hidden;
+    @apply bg-surface-200/50 backdrop-blur-xl border border-white/[0.06] rounded-2xl shadow-elevation-2 p-6 relative overflow-hidden;
   }
   .stat-label {
     @apply text-2xs font-semibold text-white/40 uppercase tracking-widest;
