@@ -58,6 +58,9 @@
   .btn-brand {
     @apply btn bg-gradient-to-b from-brand-500 to-brand-700 text-white font-semibold shadow-brand hover:shadow-brand-lg;
   }
+  .btn-business {
+    @apply btn bg-gradient-to-b from-business-500 to-business-800 text-white font-semibold shadow-business hover:shadow-business-lg;
+  }
   .btn-ghost {
     @apply btn text-white/60 hover:text-white hover:bg-white/[0.06];
   }
@@ -133,6 +136,15 @@
   .text-gradient {
     @apply bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500 bg-clip-text text-transparent;
   }
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-400 via-brand-500 to-brand-600 bg-clip-text text-transparent;
+  }
+  .text-gradient-business {
+    @apply bg-gradient-to-r from-business-400 via-business-500 to-business-700 bg-clip-text text-transparent;
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-accent-300 via-accent-500 to-accent-600 bg-clip-text text-transparent;
+  }
   .skeleton {
     @apply bg-gradient-to-r from-surface-300 via-surface-400 to-surface-300 bg-[length:200%_100%] animate-shimmer rounded-lg;
   }
@@ -153,6 +165,17 @@
       radial-gradient(at 85% 80%, rgba(255, 215, 0, 0.05) 0px, transparent 50%),
       radial-gradient(at 50% 50%, rgba(0, 149, 255, 0.03) 0px, transparent 50%);
   }
+  .mesh-bg-landing {
+    background-image: 
+      radial-gradient(at 20% 20%, rgba(230, 57, 70, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, rgba(255, 215, 0, 0.1) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(230, 57, 70, 0.05) 0px, transparent 60%);
+  }
+  .mesh-bg-business {
+    background-image: 
+      radial-gradient(at 20% 30%, rgba(26, 35, 126, 0.2) 0px, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(255, 215, 0, 0.08) 0px, transparent 50%);
+  }
   .grid-bg {
     background-image: 
       linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -161,5 +184,14 @@
   }
   .animate-in {
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
   }
 }
