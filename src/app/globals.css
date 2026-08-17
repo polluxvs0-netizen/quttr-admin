@@ -26,7 +26,6 @@
     letter-spacing: -0.011em;
   }
 
-  /* Modern scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -46,7 +45,6 @@
     background: rgba(255, 255, 255, 0.2);
   }
 
-  /* Autofill */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
@@ -60,17 +58,12 @@
     color: white;
   }
 
-  /* Focus styles */
   *:focus-visible {
     outline: 2px solid rgba(255, 215, 0, 0.5);
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
-
-/* ═══════════════════════════════════════════════════
-   COMPONENTS — 2026 Style
-   ═══════════════════════════════════════════════════ */
 
 @layer components {
   /* ─── Cards ────────────────────────── */
@@ -162,7 +155,7 @@
     @apply text-xs text-white/30 mt-1.5;
   }
 
-  /* ─── Badges ───────────────────────── */
+  /* ─── Chips / Badges ───────────────── */
   .chip {
     @apply inline-flex items-center gap-1.5 px-2.5 py-1
            rounded-lg text-2xs font-semibold
@@ -193,13 +186,13 @@
     @apply chip bg-white/5 text-white/60 border border-white/10;
   }
 
-  /* ─── Sidebar ──────────────────────── */
+  /* ─── Sidebar / Nav ────────────────── */
   .nav-link {
     @apply flex items-center gap-3 px-3 py-2 
            rounded-xl text-sm font-medium
            text-white/60 hover:text-white 
            hover:bg-white/[0.06]
-           transition-all duration-150 group;
+           transition-all duration-150;
   }
 
   .nav-link-active {
@@ -207,9 +200,9 @@
            shadow-inset-border;
   }
 
-  /* ─── Data Cards ───────────────────── */
+  /* ─── Data Cards / Stats ───────────── */
   .stat-card {
-    @apply card p-6 relative overflow-hidden group;
+    @apply card p-6 relative overflow-hidden;
   }
 
   .stat-label {
@@ -229,7 +222,7 @@
     @apply text-error text-sm font-semibold;
   }
 
-  /* ─── Command Palette ──────────────── */
+  /* ─── Command Palette Items ────────── */
   .cmd-item {
     @apply flex items-center gap-3 px-3 py-2.5 
            rounded-lg text-sm text-white/80
@@ -275,10 +268,6 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════
-   UTILITIES
-   ═══════════════════════════════════════════════════ */
-
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -322,7 +311,6 @@
   }
 }
 
-/* Delay classes for staggered animations */
 .delay-75 { animation-delay: 75ms; }
 .delay-100 { animation-delay: 100ms; }
 .delay-150 { animation-delay: 150ms; }
