@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 const CUSTOMER_PKG = 'com.quttr.customer';
 const BUSINESS_PKG = 'com.quttr.business';
@@ -52,8 +53,9 @@ export default function Page() {
 function LoadingScreen() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-black">
-      <div className="relative">
-        <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+      <div className="relative flex flex-col items-center gap-4">
+        <div className="w-10 h-10 border-2 border-[#E63946]/30 border-t-[#FFD700] rounded-full animate-spin" />
+        <p className="text-[#FFD700]/60 text-xs tracking-[0.3em] uppercase">Quttr</p>
       </div>
       <GlobalStyles />
     </div>
@@ -131,7 +133,7 @@ function LandingContent() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
       />
 
       <StickyHeader scrolled={scrolled} onDownload={downloadCustomer} />
@@ -162,33 +164,37 @@ function StickyHeader({ scrolled, onDownload }) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.08]'
+          ? 'bg-black/85 backdrop-blur-xl border-b border-[#FFD700]/[0.15]'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle cx="6" cy="6" r="3" stroke="white" strokeWidth="1.5" />
-            <circle cx="6" cy="18" r="3" stroke="white" strokeWidth="1.5" />
-            <path d="M20 4L8.12 15.88" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M14.47 14.48L20 20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M8.12 8.12L12 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-          <span className="text-[15px] font-semibold tracking-tight">Quttr</span>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="relative w-8 h-8">
+            <Image
+              src="/quttr-logo.png"
+              alt="Quttr"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+          </div>
+          <span className="text-[16px] font-bold tracking-tight">
+            Quttr<span className="text-[#FFD700]">.</span>
+          </span>
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-[13px] text-white/70">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#barbers" className="hover:text-white transition-colors">For Barbers</a>
-          <a href="#download" className="hover:text-white transition-colors">Download</a>
+          <a href="#features" className="hover:text-[#FFD700] transition-colors">Features</a>
+          <a href="#barbers" className="hover:text-[#FFD700] transition-colors">For Barbers</a>
+          <a href="#download" className="hover:text-[#FFD700] transition-colors">Download</a>
         </nav>
 
         <button
           onClick={onDownload}
-          className="text-[13px] font-medium bg-white text-black px-4 py-1.5 rounded-full hover:bg-white/90 transition-all"
+          className="text-[13px] font-semibold bg-gradient-to-r from-[#E63946] to-[#B01824] text-white px-5 py-2 rounded-full hover:shadow-[0_0_20px_rgba(230,57,70,0.5)] transition-all"
         >
-          Get the app
+          डाउनलोड
         </button>
       </div>
     </header>
@@ -196,7 +202,7 @@ function StickyHeader({ scrolled, onDownload }) {
 }
 
 /* ============================================
-   HERO SECTION - Apple Style
+   HERO SECTION - Themed with Logo
    ============================================ */
 function HeroSection({ onDownload }) {
   const [ref, inView] = useInView();
@@ -206,71 +212,120 @@ function HeroSection({ onDownload }) {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center px-6 pt-32 pb-20 overflow-hidden"
     >
-      {/* Subtle background glow */}
+      {/* Rich themed background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#E63946]/[0.08] rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#E63946]/[0.15] rounded-full blur-[130px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#FFD700]/[0.08] rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#B01824]/[0.1] rounded-full blur-[100px]" />
       </div>
 
       <div className={`relative z-10 max-w-5xl mx-auto text-center transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        
+        {/* App Logo - Large & Prominent */}
+        <div className="flex justify-center mb-10">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 qr-logo-float">
+            <div className="absolute inset-0 bg-[#E63946]/40 blur-3xl rounded-full qr-logo-pulse" />
+            <Image
+              src="/quttr-logo.png"
+              alt="Quttr Logo"
+              fill
+              className="object-contain relative z-10 drop-shadow-[0_0_40px_rgba(230,57,70,0.6)]"
+              priority
+            />
+          </div>
+        </div>
+
         {/* Small badge */}
-        <div className="inline-flex items-center gap-2 mb-8">
-          <span className="text-[11px] font-semibold tracking-[0.3em] text-white/50 uppercase">
-            Introducing Quttr
+        <div className="inline-flex items-center gap-2 mb-6">
+          <span className="text-[11px] font-bold tracking-[0.3em] text-[#FFD700] uppercase px-4 py-1.5 rounded-full border border-[#FFD700]/30 bg-[#FFD700]/[0.05]">
+            ✂️ Quttr · भारत का #1 बार्बर ऐप
           </span>
         </div>
 
-        {/* Massive headline - Apple style */}
-        <h1 className="qr-hero-title text-[52px] md:text-[96px] font-bold leading-[1.05] tracking-[-0.04em] text-white mb-6">
-          Skip the wait.
+        {/* Massive headline */}
+        <h1 className="qr-hero-title text-[54px] md:text-[100px] font-black leading-[1.05] tracking-[-0.04em] text-white mb-6">
+          <span className="qr-gold-red-gradient">इंतज़ार खत्म।</span>
           <br />
-          <span className="qr-gradient-text">Walk in fresh.</span>
+          <span className="text-white">Fresh लुक शुरू।</span>
         </h1>
 
-        {/* Hindi subtitle */}
-        <p className="qr-hindi text-[22px] md:text-[28px] font-medium text-white/60 mb-8 tracking-tight">
-          बुकिंग सेकंडों में। इंतज़ार भूल जाइए।
+        {/* English subtitle */}
+        <p className="text-[22px] md:text-[30px] font-medium text-white/70 mb-4 tracking-tight">
+          Skip the Wait. Walk in Fresh.
+        </p>
+
+        {/* Hindi description */}
+        <p className="qr-hindi text-[18px] md:text-[22px] text-[#FFD700]/90 mb-3 font-semibold">
+          बुकिंग सेकंडों में। बार्बर आपकी पसंद का।
         </p>
 
         {/* Description */}
-        <p className="text-[18px] md:text-[21px] text-white/60 max-w-2xl mx-auto leading-relaxed mb-12 font-normal">
-          The fastest way to book your favorite barber.
+        <p className="text-[16px] md:text-[19px] text-white/60 max-w-2xl mx-auto leading-relaxed mb-14 font-normal">
+          अब लाइन में लगने की जरूरत नहीं। घर बैठे बुक करें, 
           <br className="hidden md:block" />
-          No more waiting. No more phone calls.
+          अपनी बारी पर पहुंचे, और fresh look के साथ निकलें।
         </p>
 
-        {/* CTAs - Apple style */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        {/* BIG Download Button */}
+        <div className="flex flex-col items-center gap-6 mb-8">
           <button
             onClick={onDownload}
-            className="qr-btn-primary group inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[17px] font-normal px-6 py-3 rounded-full transition-all duration-200"
+            className="qr-mega-btn group relative inline-flex items-center gap-4 text-white text-[19px] md:text-[22px] font-bold px-10 md:px-14 py-5 md:py-6 rounded-full transition-all duration-300 overflow-hidden"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-              <path d="M3 20.5V3.5a.5.5 0 0 1 .8-.4l14.5 8.5a.5.5 0 0 1 0 .8L3.8 20.9a.5.5 0 0 1-.8-.4z" />
-            </svg>
-            Download for Android
+            <span className="qr-btn-shine" />
+            <div className="relative z-10 flex items-center gap-4">
+              <svg viewBox="0 0 512 512" className="w-8 h-8 md:w-10 md:h-10 drop-shadow-[0_0_8px_rgba(255,215,0,0.9)]">
+                <path fill="#FFD700" d="M99 8c-6 3-11 9-13 17v462c2 8 7 14 13 17l255-248L99 8z" />
+                <path fill="#FFDE4A" d="M354 256l-72-72L99 8c-4 2-8 5-10 9l188 239 77-0z" />
+                <path fill="#FFD700" d="M99 504c2 4 6 7 10 9l183-176-77-81L99 504z" />
+                <path fill="#FFDE4A" d="M354 256l83-48c11-6 11-22 0-28l-83-48-77 76 77 48z" />
+              </svg>
+              <div className="flex flex-col items-start text-left">
+                <span className="text-[10px] md:text-[11px] font-bold text-[#FFD700] tracking-[0.25em] leading-none">
+                  GET IT ON
+                </span>
+                <span className="text-[22px] md:text-[26px] font-black leading-tight mt-1">
+                  Google Play
+                </span>
+              </div>
+            </div>
           </button>
 
-          <a
-            href="#features"
-            className="group inline-flex items-center gap-1 text-[17px] font-normal text-[#2997FF] hover:underline"
-          >
-            Learn more
-            <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M9.7 6.3a1 1 0 0 0 0 1.4l4.3 4.3-4.3 4.3a1 1 0 1 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0z" />
-            </svg>
-          </a>
+          <div className="flex flex-col items-center gap-1">
+            <p className="qr-hindi text-[17px] md:text-[19px] font-bold text-[#FFD700] qr-bounce-down">
+              👇 अभी डाउनलोड करें
+            </p>
+            <p className="text-[13px] text-white/50">Free · No hidden charges</p>
+          </div>
         </div>
 
-        {/* Trust text */}
-        <p className="text-[13px] text-white/40 font-normal">
-          Free • ★ 4.8 rating • 10,000+ downloads
-        </p>
+        {/* Trust badges */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-8 border-t border-white/10 max-w-2xl mx-auto">
+          <div className="flex items-center gap-2">
+            <div className="flex text-[#FFD700]">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-[13px] font-semibold text-white/80">4.8 Rating</span>
+          </div>
+          <div className="w-px h-4 bg-white/20 hidden sm:block" />
+          <p className="qr-hindi text-[13px] font-semibold text-white/80">
+            ⭐ 10,000+ लोग जुड़ चुके हैं
+          </p>
+          <div className="w-px h-4 bg-white/20 hidden sm:block" />
+          <p className="text-[13px] font-semibold text-white/80">
+            100% Free
+          </p>
+        </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-30">
-        <div className="w-5 h-8 border border-white/40 rounded-full flex items-start justify-center p-1">
-          <div className="w-1 h-2 bg-white/60 rounded-full qr-scroll-dot" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-40">
+        <div className="w-5 h-8 border border-[#FFD700]/40 rounded-full flex items-start justify-center p-1">
+          <div className="w-1 h-2 bg-[#FFD700]/60 rounded-full qr-scroll-dot" />
         </div>
       </div>
     </section>
@@ -284,36 +339,43 @@ function FeatureOne() {
   const [ref, inView] = useInView();
 
   return (
-    <section ref={ref} id="features" className="min-h-screen flex items-center px-6 py-24 md:py-32 border-t border-white/[0.06]">
-      <div className="max-w-7xl mx-auto w-full">
+    <section ref={ref} id="features" className="min-h-screen flex items-center px-6 py-24 md:py-32 border-t border-white/[0.06] relative overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-[#E63946]/[0.1] rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto w-full relative">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-[13px] font-semibold tracking-[0.3em] text-[#2997FF] uppercase mb-6">
-              Speed
+            <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+              ⚡ स्पीड · SPEED
             </p>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-2">
-              Book in seconds.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-3">
+              <span className="text-white">15 सेकंड</span>
             </h2>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
-              Not minutes.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
+              में बुकिंग।
             </h2>
-            <p className="qr-hindi text-[20px] font-medium text-white/60 mb-6">
-              15 सेकंड में बुक करें।
+            <p className="text-[20px] md:text-[24px] font-semibold text-[#FFD700] mb-4">
+              Book in seconds. Not minutes.
             </p>
-            <p className="text-[18px] md:text-[19px] text-white/60 leading-relaxed">
-              Skip the phone calls. Skip the waiting. Just tap, select your time, and you're done. Your favorite barber is one tap away.
+            <p className="qr-hindi text-[17px] md:text-[19px] text-white/70 leading-relaxed mb-4">
+              फोन कॉल भूल जाइए। इंतज़ार भूल जाइए। बस टैप करें, 
+              समय चुनें, और बुकिंग हो गई।
+            </p>
+            <p className="text-[16px] md:text-[18px] text-white/50 leading-relaxed">
+              Your favorite barber is just one tap away.
             </p>
           </div>
 
           <div className={`transition-all duration-1000 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0071E3]/20 to-transparent rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#E63946]/20 via-[#FFD700]/10 to-transparent rounded-3xl border border-[#FFD700]/20" />
               <div className="relative h-full flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-[120px] md:text-[180px] font-bold tracking-[-0.04em] leading-none bg-gradient-to-b from-white to-white/30 bg-clip-text text-transparent">
+                  <div className="qr-gold-red-gradient text-[120px] md:text-[200px] font-black tracking-[-0.04em] leading-none">
                     15
                   </div>
-                  <div className="text-[24px] font-medium text-white/50 mt-2">seconds</div>
+                  <div className="qr-hindi text-[24px] md:text-[28px] font-bold text-white/70 mt-2">सेकंड</div>
+                  <div className="text-[16px] text-white/40 mt-1">seconds</div>
                 </div>
               </div>
             </div>
@@ -335,34 +397,44 @@ function FeatureTwo() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className={`md:order-2 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-[13px] font-semibold tracking-[0.3em] text-[#2997FF] uppercase mb-6">
-              Choice
+            <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+              💈 चॉइस · CHOICE
             </p>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-2">
-              Your barber.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-3">
+              <span className="text-white">अपना</span>
             </h2>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
-              Your choice.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] qr-gold-red-gradient mb-6">
+              पसंदीदा बार्बर।
             </h2>
-            <p className="qr-hindi text-[20px] font-medium text-white/60 mb-6">
-              अपना पसंदीदा बार्बर।
+            <p className="text-[20px] md:text-[24px] font-semibold text-[#FFD700] mb-4">
+              Your Barber. Your Choice.
             </p>
-            <p className="text-[18px] md:text-[19px] text-white/60 leading-relaxed">
-              Choose from hundreds of skilled barbers in your city. See their portfolios, read reviews, and book the one who understands your style.
+            <p className="qr-hindi text-[17px] md:text-[19px] text-white/70 leading-relaxed mb-4">
+              शहर के 500+ बार्बर में से चुनें। उनके काम की तस्वीरें देखें, 
+              रिव्यू पढ़ें, और अपने style समझने वाले को बुक करें।
+            </p>
+            <p className="text-[16px] md:text-[18px] text-white/50 leading-relaxed">
+              Choose from hundreds of skilled barbers in your city.
             </p>
           </div>
 
           <div className={`md:order-1 transition-all duration-1000 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#E63946]/10 to-transparent rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E63946]/15 via-transparent to-[#FFD700]/10 rounded-3xl border border-[#E63946]/20" />
               <div className="relative h-full flex items-center justify-center p-8">
                 <div className="grid grid-cols-2 gap-4 w-full">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="aspect-square bg-white/5 rounded-2xl border border-white/[0.08] flex items-center justify-center hover:border-white/20 transition-colors">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/5 rounded-full mx-auto mb-2" />
-                        <div className="text-[10px] text-white/40">★ 4.{9 - i}</div>
+                  {[
+                    { name: 'राज', rating: '4.9' },
+                    { name: 'अमित', rating: '4.8' },
+                    { name: 'विकास', rating: '4.9' },
+                    { name: 'सुनील', rating: '4.7' }
+                  ].map((barber, i) => (
+                    <div key={i} className="aspect-square bg-gradient-to-br from-white/[0.08] to-white/[0.02] rounded-2xl border border-white/10 hover:border-[#FFD700]/40 transition-all flex flex-col items-center justify-center p-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-[#E63946]/40 to-[#B01824]/40 rounded-full mb-3 flex items-center justify-center">
+                        <span className="qr-hindi text-white/80 font-bold text-lg">{barber.name[0]}</span>
                       </div>
+                      <div className="qr-hindi text-[13px] font-semibold text-white/90">{barber.name}</div>
+                      <div className="text-[11px] text-[#FFD700] mt-1">★ {barber.rating}</div>
                     </div>
                   ))}
                 </div>
@@ -382,43 +454,50 @@ function FeatureThree() {
   const [ref, inView] = useInView();
 
   return (
-    <section ref={ref} className="min-h-screen flex items-center px-6 py-24 md:py-32 border-t border-white/[0.06]">
-      <div className="max-w-7xl mx-auto w-full">
+    <section ref={ref} className="min-h-screen flex items-center px-6 py-24 md:py-32 border-t border-white/[0.06] relative overflow-hidden">
+      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-[#FFD700]/[0.08] rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto w-full relative">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-[13px] font-semibold tracking-[0.3em] text-[#2997FF] uppercase mb-6">
-              Tracking
+            <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+              📍 ट्रैकिंग · TRACKING
             </p>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-2">
-              Know your turn.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-3">
+              <span className="text-white">अपनी बारी</span>
             </h2>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
-              Down to the minute.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
+              live देखें।
             </h2>
-            <p className="qr-hindi text-[20px] font-medium text-white/60 mb-6">
-              अपनी बारी जानें।
+            <p className="text-[20px] md:text-[24px] font-semibold text-[#FFD700] mb-4">
+              Know your turn. Live tracking.
             </p>
-            <p className="text-[18px] md:text-[19px] text-white/60 leading-relaxed">
-              Real-time queue tracking with GPS. No more sitting in crowded shops. Arrive exactly when it's your turn.
+            <p className="qr-hindi text-[17px] md:text-[19px] text-white/70 leading-relaxed mb-4">
+              GPS के साथ live queue tracking। भीड़ भरी दुकान में बैठने की जरूरत नहीं। 
+              बस अपनी बारी पर पहुंचे।
+            </p>
+            <p className="text-[16px] md:text-[18px] text-white/50 leading-relaxed">
+              Real-time queue tracking with GPS. Arrive exactly when it's your turn.
             </p>
           </div>
 
           <div className={`transition-all duration-1000 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-bl from-[#0071E3]/15 to-transparent rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-bl from-[#FFD700]/15 to-transparent rounded-3xl border border-[#FFD700]/20" />
               <div className="relative h-full flex flex-col justify-center items-center p-8">
-                <div className="text-[16px] text-white/50 mb-4">Your turn in</div>
-                <div className="text-[80px] md:text-[120px] font-bold tracking-[-0.04em] leading-none text-white">
+                <div className="qr-hindi text-[16px] text-white/60 mb-4 font-semibold">आपकी बारी में</div>
+                <div className="qr-gold-red-gradient text-[80px] md:text-[140px] font-black tracking-[-0.04em] leading-none">
                   8
                 </div>
-                <div className="text-[24px] font-medium text-white/60 mt-2">minutes</div>
+                <div className="qr-hindi text-[24px] md:text-[28px] font-bold text-white/70 mt-2">मिनट</div>
+                <div className="text-[14px] text-white/40 mt-1">minutes remaining</div>
                 <div className="mt-8 w-full max-w-xs">
-                  <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-3/4 bg-[#0071E3] qr-progress-bar" />
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full w-3/4 bg-gradient-to-r from-[#E63946] to-[#FFD700] qr-progress-bar" />
                   </div>
                   <div className="flex justify-between text-[11px] text-white/40 mt-2">
                     <span>Position 3</span>
-                    <span>Position 1</span>
+                    <span>आपकी बारी</span>
                   </div>
                 </div>
               </div>
@@ -441,37 +520,43 @@ function FeatureFour() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className={`md:order-2 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-[13px] font-semibold tracking-[0.3em] text-[#2997FF] uppercase mb-6">
-              Rewards
+            <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+              🎁 रिवॉर्ड्स · REWARDS
             </p>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-2">
-              Get rewarded.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-3">
+              <span className="text-white">हर विजिट पर</span>
             </h2>
-            <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
-              Every visit.
+            <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] qr-gold-red-gradient mb-6">
+              पॉइंट्स कमाएं।
             </h2>
-            <p className="qr-hindi text-[20px] font-medium text-white/60 mb-6">
-              हर विजिट पर रिवॉर्ड।
+            <p className="text-[20px] md:text-[24px] font-semibold text-[#FFD700] mb-4">
+              Earn rewards every visit.
             </p>
-            <p className="text-[18px] md:text-[19px] text-white/60 leading-relaxed">
-              Earn points on every booking. Redeem for discounts, exclusive services, and premium features. Loyalty pays.
+            <p className="qr-hindi text-[17px] md:text-[19px] text-white/70 leading-relaxed mb-4">
+              हर बुकिंग पर पॉइंट्स कमाएं। छूट, फ्री सर्विस, 
+              और premium features के लिए redeem करें। 
+              वफादारी का इनाम मिलता है।
+            </p>
+            <p className="text-[16px] md:text-[18px] text-white/50 leading-relaxed">
+              Earn points on every booking. Redeem for discounts and premium features.
             </p>
           </div>
 
           <div className={`md:order-1 transition-all duration-1000 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#FFD700]/10 to-transparent rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#FFD700]/15 via-[#E63946]/10 to-transparent rounded-3xl border border-[#FFD700]/25" />
               <div className="relative h-full flex flex-col justify-center items-center p-8">
-                <div className="text-[14px] text-white/50 mb-2 tracking-[0.2em] uppercase">Total Points</div>
-                <div className="text-[100px] md:text-[140px] font-bold tracking-[-0.04em] leading-none bg-gradient-to-b from-[#FFD700] to-[#FFD700]/40 bg-clip-text text-transparent">
+                <div className="qr-hindi text-[14px] text-white/60 mb-2 tracking-[0.2em] uppercase font-bold">आपके पॉइंट्स</div>
+                <div className="qr-gold-red-gradient text-[80px] md:text-[130px] font-black tracking-[-0.04em] leading-none">
                   2,450
                 </div>
-                <div className="mt-8 flex gap-3">
-                  <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[12px] text-white/60">
-                    ₹250 off
+                <div className="text-[16px] text-white/50 mt-2">Total Points</div>
+                <div className="mt-8 flex flex-wrap gap-2 justify-center">
+                  <div className="px-4 py-2 bg-[#E63946]/20 border border-[#E63946]/40 rounded-full text-[13px] text-[#FFD700] qr-hindi font-semibold">
+                    ₹250 छूट
                   </div>
-                  <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[12px] text-white/60">
-                    Free service
+                  <div className="px-4 py-2 bg-[#FFD700]/10 border border-[#FFD700]/40 rounded-full text-[13px] text-[#FFD700] qr-hindi font-semibold">
+                    Free Service
                   </div>
                 </div>
               </div>
@@ -489,23 +574,25 @@ function FeatureFour() {
 function HowItWorks() {
   const [ref, inView] = useInView();
   const steps = [
-    { num: '01', title: 'Choose barber', hi: 'बार्बर चुनें', desc: 'Browse verified barbers near you' },
-    { num: '02', title: 'Book slot', hi: 'स्लॉट बुक करें', desc: 'Pick a time that works for you' },
-    { num: '03', title: 'Walk in fresh', hi: 'फ्रेश निकलें', desc: 'Arrive on time, no waiting' },
+    { num: '01', title: 'बार्बर चुनें', en: 'Choose Barber', desc: 'अपने पास के verified बार्बर देखें' },
+    { num: '02', title: 'स्लॉट बुक करें', en: 'Book Your Slot', desc: 'अपनी सुविधा का समय चुनें' },
+    { num: '03', title: 'Fresh निकलें', en: 'Walk in Fresh', desc: 'सही समय पर पहुंचे, बिना इंतज़ार' },
   ];
 
   return (
-    <section ref={ref} className="px-6 py-24 md:py-32 border-t border-white/[0.06]">
-      <div className="max-w-7xl mx-auto">
+    <section ref={ref} className="px-6 py-24 md:py-32 border-t border-white/[0.06] relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#E63946]/[0.08] rounded-full blur-[130px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative">
         <div className={`text-center mb-20 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-[13px] font-semibold tracking-[0.3em] text-[#2997FF] uppercase mb-6">
-            How it works
+          <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+            कैसे काम करता है
           </p>
-          <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-4">
-            Three simple steps.
+          <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-4">
+            <span className="qr-gold-red-gradient">बस 3 आसान steps।</span>
           </h2>
-          <p className="qr-hindi text-[20px] font-medium text-white/60">
-            बस तीन आसान स्टेप्स।
+          <p className="text-[20px] md:text-[24px] font-semibold text-white/70">
+            Just 3 simple steps.
           </p>
         </div>
 
@@ -513,19 +600,19 @@ function HowItWorks() {
           {steps.map((step, i) => (
             <div
               key={i}
-              className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`relative transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              <div className="text-[80px] md:text-[100px] font-bold tracking-[-0.04em] leading-none text-white/10 mb-6">
+              <div className="qr-gold-red-gradient text-[100px] md:text-[130px] font-black tracking-[-0.04em] leading-none opacity-30 mb-4">
                 {step.num}
               </div>
-              <h3 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] mb-2">
+              <h3 className="qr-hindi text-[32px] md:text-[38px] font-black tracking-[-0.02em] mb-2 text-white">
                 {step.title}
               </h3>
-              <p className="qr-hindi text-[16px] font-medium text-white/50 mb-3">
-                {step.hi}
+              <p className="text-[16px] font-semibold text-[#FFD700] mb-3">
+                {step.en}
               </p>
-              <p className="text-[16px] text-white/60 leading-relaxed">
+              <p className="qr-hindi text-[17px] text-white/70 leading-relaxed">
                 {step.desc}
               </p>
             </div>
@@ -543,34 +630,41 @@ function TestimonialsSection() {
   const [ref, inView] = useInView();
   const testimonials = [
     {
-      quote: 'Finally, no more waiting for hours. Quttr changed how I get my haircut.',
-      hi: 'अब घंटों इंतज़ार नहीं करना पड़ता।',
-      name: 'Rahul Sharma',
-      city: 'Delhi',
+      quote: 'अब घंटों इंतज़ार नहीं करना पड़ता। Quttr ने मेरी life आसान कर दी।',
+      en: 'No more waiting for hours. Quttr changed my life.',
+      name: 'राहुल शर्मा',
+      city: 'दिल्ली',
     },
     {
-      quote: 'The queue tracking is amazing. I arrive exactly when it\'s my turn.',
-      hi: 'क्यू ट्रैकिंग बहुत बढ़िया है।',
-      name: 'Amit Kumar',
-      city: 'Mumbai',
+      quote: 'Queue tracking बहुत बढ़िया है। मैं exact time पर पहुंचता हूं।',
+      en: 'Queue tracking is amazing. I arrive exactly on time.',
+      name: 'अमित कुमार',
+      city: 'मुंबई',
     },
     {
-      quote: 'My barber is always available on Quttr. Booking takes seconds.',
-      hi: 'मेरा बार्बर हमेशा उपलब्ध है।',
-      name: 'Vikas Singh',
-      city: 'Bangalore',
+      quote: 'मेरा पसंदीदा बार्बर हमेशा Quttr पर available रहता है।',
+      en: 'My favorite barber is always available on Quttr.',
+      name: 'विकास सिंह',
+      city: 'बैंगलोर',
     },
   ];
 
   return (
-    <section ref={ref} className="px-6 py-24 md:py-32 border-t border-white/[0.06] bg-[#0A0A0A]">
-      <div className="max-w-7xl mx-auto">
+    <section ref={ref} className="px-6 py-24 md:py-32 border-t border-white/[0.06] bg-gradient-to-b from-[#0A0000] to-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(230,57,70,0.05),transparent_70%)] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative">
         <div className={`text-center mb-20 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-[36px] md:text-[56px] font-bold leading-[1.1] tracking-[-0.03em] mb-4">
-            Loved by thousands.
+          <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase mb-6">
+            ⭐ Reviews
+          </p>
+          <h2 className="text-[38px] md:text-[64px] font-black leading-[1.1] tracking-[-0.03em] mb-4">
+            <span className="text-white">10,000+ लोगों का</span>
+            <br />
+            <span className="qr-gold-red-gradient">भरोसा।</span>
           </h2>
-          <p className="qr-hindi text-[18px] font-medium text-white/50">
-            हज़ारों भारतीयों का पसंदीदा
+          <p className="text-[18px] md:text-[22px] font-semibold text-white/60">
+            Trusted by thousands across India.
           </p>
         </div>
 
@@ -578,27 +672,29 @@ function TestimonialsSection() {
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className={`bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 transition-all duration-1000 hover:border-white/20 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] rounded-2xl p-8 transition-all duration-1000 hover:border-[#FFD700]/40 hover:shadow-[0_0_40px_rgba(255,215,0,0.15)] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, j) => (
-                  <svg key={j} className="w-4 h-4 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={j} className="w-5 h-5 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                   </svg>
                 ))}
               </div>
-              <p className="text-[19px] leading-relaxed text-white/90 mb-4">
+              <p className="qr-hindi text-[18px] leading-relaxed text-white/90 mb-4 font-medium">
                 "{t.quote}"
               </p>
-              <p className="qr-hindi text-[15px] text-white/50 mb-6">
-                {t.hi}
+              <p className="text-[14px] italic text-white/50 mb-6">
+                {t.en}
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5" />
+              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E63946] to-[#B01824] flex items-center justify-center">
+                  <span className="qr-hindi text-white font-bold">{t.name[0]}</span>
+                </div>
                 <div>
-                  <div className="text-[15px] font-medium">{t.name}</div>
-                  <div className="text-[13px] text-white/40">{t.city}</div>
+                  <div className="qr-hindi text-[15px] font-bold text-white">{t.name}</div>
+                  <div className="qr-hindi text-[13px] text-[#FFD700]">{t.city}</div>
                 </div>
               </div>
             </div>
@@ -610,57 +706,83 @@ function TestimonialsSection() {
 }
 
 /* ============================================
-   BARBER SECTION
+   BARBER SECTION - With Business Logo
    ============================================ */
 function BarberSection({ onDownload }) {
   const [ref, inView] = useInView();
   const benefits = [
-    'Digital appointment management',
-    'Real-time earnings dashboard',
-    'Customer loyalty programs',
-    'Business analytics & insights',
-    'Marketing & promotional tools',
+    { hi: 'डिजिटल बुकिंग मैनेजमेंट', en: 'Digital appointment management' },
+    { hi: 'रियल-टाइम कमाई ट्रैकिंग', en: 'Real-time earnings dashboard' },
+    { hi: 'कस्टमर लॉयल्टी प्रोग्राम', en: 'Customer loyalty programs' },
+    { hi: 'बिज़नेस एनालिटिक्स', en: 'Business analytics & insights' },
+    { hi: 'मार्केटिंग सपोर्ट', en: 'Marketing & promotional tools' },
   ];
 
   return (
-    <section ref={ref} id="barbers" className="px-6 py-24 md:py-32 border-t border-white/[0.06]" style={{ background: 'linear-gradient(180deg, #0A0E27 0%, #000000 100%)' }}>
-      <div className="max-w-6xl mx-auto">
+    <section ref={ref} id="barbers" className="px-6 py-24 md:py-32 border-t border-white/[0.06] relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #050A20 0%, #000000 100%)' }}>
+      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#1A237E]/[0.3] rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#FFD700]/[0.08] rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto relative">
         <div className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-[13px] font-semibold tracking-[0.3em] text-[#3B82F6] uppercase mb-8">
-            For Barbers
-          </p>
+          
+          {/* Business Logo Header */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 mb-6 qr-logo-float">
+              <div className="absolute inset-0 bg-[#1A237E] blur-3xl rounded-full opacity-60 qr-logo-pulse" />
+              <Image
+                src="/quttr-business-logo.png"
+                alt="Quttr Business"
+                fill
+                className="object-contain relative z-10 drop-shadow-[0_0_30px_rgba(26,35,126,0.7)]"
+              />
+            </div>
+            <p className="text-[13px] font-bold tracking-[0.3em] text-[#FFD700] uppercase">
+              💼 बार्बर के लिए · For Barbers
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] mb-2">
-                Grow your
+              <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] mb-3">
+                <span className="text-white">अपना बिज़नेस</span>
               </h2>
-              <h2 className="text-[44px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-white/40 mb-6">
-                business.
+              <h2 className="text-[46px] md:text-[76px] font-black leading-[1.05] tracking-[-0.03em] qr-blue-gold-gradient mb-6">
+                digitally बढ़ाएं।
               </h2>
-              <p className="qr-hindi text-[20px] font-medium text-white/60 mb-6">
-                अपना बिज़नेस बढ़ाएं।
+              <p className="text-[20px] md:text-[24px] font-semibold text-[#FFD700] mb-4">
+                Grow Your Business Digitally.
               </p>
-              <p className="text-[18px] md:text-[19px] text-white/60 leading-relaxed mb-8">
-                Join thousands of barbers already growing with Quttr Business. Digital bookings, real-time earnings, customer insights.
+              <p className="qr-hindi text-[17px] md:text-[19px] text-white/70 leading-relaxed mb-4">
+                हज़ारों बार्बर पहले से Quttr Business के साथ अपना बिज़नेस बढ़ा रहे हैं। 
+                Digital बुकिंग, real-time earnings, customer insights।
+              </p>
+              <p className="text-[16px] md:text-[18px] text-white/50 leading-relaxed mb-8">
+                Join thousands of barbers already growing with Quttr Business.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={onDownload}
-                  className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[17px] font-normal px-6 py-3 rounded-full transition-all duration-200"
+                  className="qr-mega-btn-blue group relative inline-flex items-center gap-3 text-white text-[17px] md:text-[19px] font-bold px-8 py-4 md:px-10 md:py-5 rounded-full transition-all duration-300 overflow-hidden"
                 >
-                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                    <path d="M3 20.5V3.5a.5.5 0 0 1 .8-.4l14.5 8.5a.5.5 0 0 1 0 .8L3.8 20.9a.5.5 0 0 1-.8-.4z" />
-                  </svg>
-                  Download Quttr Business
+                  <span className="qr-btn-shine" />
+                  <div className="relative z-10 flex items-center gap-3">
+                    <svg viewBox="0 0 512 512" className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(255,215,0,0.9)]">
+                      <path fill="#FFD700" d="M99 8c-6 3-11 9-13 17v462c2 8 7 14 13 17l255-248L99 8z" />
+                      <path fill="#FFDE4A" d="M354 256l-72-72L99 8c-4 2-8 5-10 9l188 239 77-0z" />
+                      <path fill="#FFD700" d="M99 504c2 4 6 7 10 9l183-176-77-81L99 504z" />
+                      <path fill="#FFDE4A" d="M354 256l83-48c11-6 11-22 0-28l-83-48-77 76 77 48z" />
+                    </svg>
+                    <span className="qr-hindi">Quttr BUSINESS डाउनलोड</span>
+                  </div>
                 </button>
 
                 <a
                   href="tel:+919519953149"
-                  className="inline-flex items-center gap-1 text-[17px] font-normal text-[#2997FF] hover:underline justify-center sm:justify-start"
+                  className="qr-hindi inline-flex items-center justify-center gap-2 text-[16px] font-bold text-[#FFD700] hover:text-white px-6 py-4 rounded-full border border-[#FFD700]/30 hover:border-[#FFD700] transition-all"
                 >
-                  Or call us
+                  📞 अभी कॉल करें
                 </a>
               </div>
             </div>
@@ -668,11 +790,16 @@ function BarberSection({ onDownload }) {
             <div>
               <ul className="space-y-4">
                 {benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-1" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-[17px] text-white/80">{benefit}</span>
+                  <li key={i} className="flex items-start gap-4 group">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FFD700] to-[#B08900] flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                      <svg className="w-4 h-4 text-black" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="qr-hindi text-[17px] font-bold text-white">{benefit.hi}</div>
+                      <div className="text-[14px] text-white/50 mt-0.5">{benefit.en}</div>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -693,32 +820,53 @@ function FinalCTASection({ onDownload }) {
   return (
     <section ref={ref} id="download" className="relative px-6 py-32 md:py-48 border-t border-white/[0.06] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0071E3]/[0.08] rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#E63946]/[0.15] rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FFD700]/[0.08] rounded-full blur-[130px]" />
       </div>
 
       <div className={`relative max-w-4xl mx-auto text-center transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <h2 className="text-[60px] md:text-[120px] font-bold leading-[1] tracking-[-0.04em] mb-4">
-          Ready?
+        <h2 className="text-[70px] md:text-[140px] font-black leading-[1] tracking-[-0.04em] mb-4">
+          <span className="qr-gold-red-gradient">तैयार?</span>
         </h2>
-        <p className="qr-hindi text-[28px] md:text-[40px] font-medium text-white/50 mb-12">
-          तैयार हैं?
+        <p className="text-[32px] md:text-[48px] font-black text-white/70 mb-8">
+          Ready?
         </p>
-        <p className="text-[20px] md:text-[24px] text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="qr-hindi text-[20px] md:text-[26px] text-white/80 mb-4 font-semibold">
+          Quttr डाउनलोड करें और इंतज़ार को कहें अलविदा।
+        </p>
+        <p className="text-[16px] md:text-[20px] text-white/50 mb-14 max-w-2xl mx-auto leading-relaxed">
           Download Quttr and skip the wait forever.
         </p>
 
+        {/* MEGA Download Button */}
         <button
           onClick={onDownload}
-          className="inline-flex items-center gap-3 bg-white hover:bg-white/90 text-black text-[19px] font-medium px-8 py-4 rounded-full transition-all duration-200"
+          className="qr-mega-btn group relative inline-flex items-center gap-4 text-white text-[20px] md:text-[24px] font-black px-12 md:px-16 py-6 md:py-7 rounded-full transition-all duration-300 overflow-hidden"
         >
-          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-            <path d="M3 20.5V3.5a.5.5 0 0 1 .8-.4l14.5 8.5a.5.5 0 0 1 0 .8L3.8 20.9a.5.5 0 0 1-.8-.4z" />
-          </svg>
-          Download for Android
+          <span className="qr-btn-shine" />
+          <div className="relative z-10 flex items-center gap-4">
+            <svg viewBox="0 0 512 512" className="w-9 h-9 md:w-11 md:h-11 drop-shadow-[0_0_10px_rgba(255,215,0,0.9)]">
+              <path fill="#FFD700" d="M99 8c-6 3-11 9-13 17v462c2 8 7 14 13 17l255-248L99 8z" />
+              <path fill="#FFDE4A" d="M354 256l-72-72L99 8c-4 2-8 5-10 9l188 239 77-0z" />
+              <path fill="#FFD700" d="M99 504c2 4 6 7 10 9l183-176-77-81L99 504z" />
+              <path fill="#FFDE4A" d="M354 256l83-48c11-6 11-22 0-28l-83-48-77 76 77 48z" />
+            </svg>
+            <div className="flex flex-col items-start text-left">
+              <span className="text-[11px] md:text-[12px] font-bold text-[#FFD700] tracking-[0.25em] leading-none">
+                GET IT ON
+              </span>
+              <span className="text-[24px] md:text-[30px] font-black leading-tight mt-1">
+                Google Play
+              </span>
+            </div>
+          </div>
         </button>
 
-        <p className="mt-8 text-[14px] text-white/40">
-          Free • ★ 4.8 rating • Available on Google Play
+        <p className="qr-hindi mt-8 text-[15px] md:text-[17px] font-bold text-[#FFD700] qr-bounce-down">
+          👇 अभी डाउनलोड करें · Free
+        </p>
+        <p className="mt-2 text-[13px] text-white/40">
+          ★ 4.8 rating · 10,000+ downloads · Available on Google Play
         </p>
       </div>
     </section>
@@ -735,54 +883,61 @@ function FooterSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <circle cx="6" cy="6" r="3" stroke="white" strokeWidth="1.5" />
-                <circle cx="6" cy="18" r="3" stroke="white" strokeWidth="1.5" />
-                <path d="M20 4L8.12 15.88" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M14.47 14.48L20 20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M8.12 8.12L12 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-              <span className="text-[15px] font-semibold">Quttr</span>
+              <div className="relative w-8 h-8">
+                <Image
+                  src="/quttr-logo.png"
+                  alt="Quttr"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-[16px] font-bold">
+                Quttr<span className="text-[#FFD700]">.</span>
+              </span>
             </div>
-            <p className="text-[13px] text-white/40 leading-relaxed">
-              The fastest way to book your barber.
+            <p className="qr-hindi text-[13px] text-white/50 leading-relaxed">
+              भारत का सबसे तेज़ बार्बर बुकिंग ऐप।
+            </p>
+            <p className="text-[12px] text-white/30 leading-relaxed mt-2">
+              India's fastest barber booking app.
             </p>
           </div>
 
           <div>
-            <h4 className="text-[13px] font-semibold text-white mb-4">Product</h4>
+            <h4 className="text-[13px] font-bold text-[#FFD700] mb-4 tracking-wider uppercase">Product</h4>
             <ul className="space-y-2 text-[13px] text-white/50">
-              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#download" className="hover:text-white transition-colors">Download</a></li>
-              <li><a href="#barbers" className="hover:text-white transition-colors">For Barbers</a></li>
+              <li><a href="#features" className="hover:text-[#FFD700] transition-colors">Features · फीचर्स</a></li>
+              <li><a href="#download" className="hover:text-[#FFD700] transition-colors">Download · डाउनलोड</a></li>
+              <li><a href="#barbers" className="hover:text-[#FFD700] transition-colors">For Barbers · बार्बर</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-[13px] font-semibold text-white mb-4">Support</h4>
+            <h4 className="text-[13px] font-bold text-[#FFD700] mb-4 tracking-wider uppercase">Support · सपोर्ट</h4>
             <ul className="space-y-2 text-[13px] text-white/50">
-              <li><a href="mailto:support@quttrr.com" className="hover:text-white transition-colors">Email</a></li>
-              <li><a href="tel:+919519953149" className="hover:text-white transition-colors">Phone</a></li>
-              <li><a href="https://wa.me/919519953149" className="hover:text-white transition-colors">WhatsApp</a></li>
+              <li><a href="mailto:support@quttrr.com" className="hover:text-[#FFD700] transition-colors">Email</a></li>
+              <li><a href="tel:+919519953149" className="hover:text-[#FFD700] transition-colors">Phone · फोन</a></li>
+              <li><a href="https://wa.me/919519953149" className="hover:text-[#FFD700] transition-colors">WhatsApp</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-[13px] font-semibold text-white mb-4">Connect</h4>
+            <h4 className="text-[13px] font-bold text-[#FFD700] mb-4 tracking-wider uppercase">Connect · जुड़ें</h4>
             <ul className="space-y-2 text-[13px] text-white/50">
-              <li><a href="https://instagram.com/quttrofficial" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
-              <li><a href="mailto:support@quttrr.com" className="hover:text-white transition-colors">support@quttrr.com</a></li>
-              <li><a href="tel:+919519953149" className="hover:text-white transition-colors">+91 9519953149</a></li>
+              <li><a href="https://instagram.com/quttrofficial" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFD700] transition-colors">Instagram</a></li>
+              <li><a href="mailto:support@quttrr.com" className="hover:text-[#FFD700] transition-colors">support@quttrr.com</a></li>
+              <li><a href="tel:+919519953149" className="hover:text-[#FFD700] transition-colors">+91 9519953149</a></li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[12px] text-white/30">
-            Copyright © 2025 Quttr. All rights reserved.
+          <p className="text-[12px] text-white/40">
+            © 2025 Quttr. All rights reserved.
           </p>
-          <p className="text-[12px] text-white/30">
-            Made with care in India 🇮🇳
+          <p className="qr-hindi text-[12px] text-white/40">
+            प्यार से भारत में बनाया गया 🇮🇳
           </p>
         </div>
       </div>
@@ -819,15 +974,119 @@ function GlobalStyles() {
         font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
       }
 
-      .qr-gradient-text {
-        background: linear-gradient(135deg, #ffffff 0%, #ffffff 40%, #86868b 100%);
+      .qr-gold-red-gradient {
+        background: linear-gradient(135deg, #FFD700 0%, #E63946 50%, #FFD700 100%);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: qr-gradient-shift 6s ease-in-out infinite;
       }
 
-      .qr-btn-primary {
-        letter-spacing: -0.01em;
+      .qr-blue-gold-gradient {
+        background: linear-gradient(135deg, #FFD700 0%, #3949AB 50%, #FFD700 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: qr-gradient-shift 6s ease-in-out infinite;
+      }
+
+      @keyframes qr-gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .qr-mega-btn {
+        background: linear-gradient(135deg, #E63946 0%, #B01824 100%);
+        box-shadow: 
+          0 0 0 1px rgba(255, 215, 0, 0.3),
+          0 10px 40px -5px rgba(230, 57, 70, 0.6),
+          0 0 60px rgba(255, 215, 0, 0.2);
+        animation: qr-mega-pulse 2.5s ease-in-out infinite;
+      }
+
+      .qr-mega-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 
+          0 0 0 2px rgba(255, 215, 0, 0.5),
+          0 15px 50px -5px rgba(230, 57, 70, 0.8),
+          0 0 80px rgba(255, 215, 0, 0.4);
+      }
+
+      .qr-mega-btn:active {
+        transform: scale(0.98);
+      }
+
+      .qr-mega-btn-blue {
+        background: linear-gradient(135deg, #3949AB 0%, #1A237E 100%);
+        box-shadow: 
+          0 0 0 1px rgba(255, 215, 0, 0.3),
+          0 10px 40px -5px rgba(26, 35, 126, 0.6),
+          0 0 60px rgba(255, 215, 0, 0.15);
+      }
+
+      .qr-mega-btn-blue:hover {
+        transform: scale(1.05);
+        box-shadow: 
+          0 0 0 2px rgba(255, 215, 0, 0.5),
+          0 15px 50px -5px rgba(26, 35, 126, 0.8),
+          0 0 80px rgba(255, 215, 0, 0.3);
+      }
+
+      @keyframes qr-mega-pulse {
+        0%, 100% {
+          box-shadow: 
+            0 0 0 1px rgba(255, 215, 0, 0.3),
+            0 10px 40px -5px rgba(230, 57, 70, 0.6),
+            0 0 60px rgba(255, 215, 0, 0.2);
+        }
+        50% {
+          box-shadow: 
+            0 0 0 2px rgba(255, 215, 0, 0.5),
+            0 15px 50px -5px rgba(230, 57, 70, 0.85),
+            0 0 100px rgba(255, 215, 0, 0.4);
+        }
+      }
+
+      .qr-btn-shine {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.3) 50%, transparent 80%);
+        transform: translateX(-150%) skewX(-20deg);
+        animation: qr-shine-move 3s ease-in-out infinite;
+      }
+
+      @keyframes qr-shine-move {
+        0% { transform: translateX(-150%) skewX(-20deg); }
+        60%, 100% { transform: translateX(200%) skewX(-20deg); }
+      }
+
+      .qr-logo-float {
+        animation: qr-float 4s ease-in-out infinite;
+      }
+
+      @keyframes qr-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+
+      .qr-logo-pulse {
+        animation: qr-pulse 3s ease-in-out infinite;
+      }
+
+      @keyframes qr-pulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(1.1); }
+      }
+
+      .qr-bounce-down {
+        animation: qr-bounce-down-anim 1.6s ease-in-out infinite;
+      }
+
+      @keyframes qr-bounce-down-anim {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(6px); }
       }
 
       .qr-scroll-dot {
@@ -849,15 +1108,9 @@ function GlobalStyles() {
         100% { width: 25%; }
       }
 
-      /* Selection color */
       ::selection {
-        background: rgba(0, 113, 227, 0.3);
+        background: rgba(230, 57, 70, 0.4);
         color: white;
-      }
-
-      /* Smooth section transitions */
-      section {
-        position: relative;
       }
 
       @media (prefers-reduced-motion: reduce) {
