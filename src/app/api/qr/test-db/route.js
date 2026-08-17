@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/mongodb';
-import { setupDatabase } from '@/lib/db-setup';
+import { getDb } from '../../../../lib/mongodb';
+import { setupDatabase } from '../../../../lib/db-setup';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
