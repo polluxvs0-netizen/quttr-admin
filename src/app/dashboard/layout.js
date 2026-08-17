@@ -7,14 +7,18 @@ import {
   LayoutDashboard, Store, Users, Calendar, Star, Bell,
   BarChart3, Settings, LogOut, Search, Command, Menu, X,
   Sparkles, Scissors, ChevronRight,
+  AlertCircle, UserCheck, ShoppingBag,
 } from 'lucide-react';
 import { authService } from '../../services/auth';
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Approvals', href: '/dashboard/approvals', icon: AlertCircle, highlight: true },
   { name: 'Shops', href: '/dashboard/shops', icon: Store },
+  { name: 'Staff', href: '/dashboard/staff', icon: UserCheck },
   { name: 'Users', href: '/dashboard/users', icon: Users },
   { name: 'Bookings', href: '/dashboard/bookings', icon: Calendar },
+  { name: 'Products', href: '/dashboard/products', icon: ShoppingBag },
   { name: 'Reviews', href: '/dashboard/reviews', icon: Star },
   { name: 'Notices', href: '/dashboard/notices', icon: Bell },
   { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
@@ -70,11 +74,11 @@ export default function DashboardLayout({ children }) {
       <aside className={`
         fixed lg:sticky top-0 left-0 z-50 h-screen w-64
         bg-surface-100/80 backdrop-blur-2xl border-r border-white/[0.06]
-        transition-transform duration-300
+        transition-transform duration-300 flex flex-col
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-white/[0.06]">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-white/[0.06] flex-shrink-0">
           <Link href="/dashboard" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-brand">
               <Sparkles className="w-4 h-4 text-white" strokeWidth={2.5} />
@@ -92,7 +96,7 @@ export default function DashboardLayout({ children }) {
         </div>
 
         {/* Navigation */}
-        <nav className="p-3 space-y-1 overflow-y-auto no-scrollbar" style={{ height: 'calc(100vh - 64px - 80px)' }}>
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto no-scrollbar">
           <p className="px-3 py-2 text-2xs font-semibold text-white/30 uppercase tracking-widest">
             Workspace
           </p>
@@ -105,14 +109,20 @@ export default function DashboardLayout({ children }) {
                 key={item.name}
                 href={item.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`nav-link ${isActive ? 'nav-link-active' : ''}`}
+                className={`nav-link group ${isActive ? 'nav-link-active' : ''} ${
+                  item.highlight && !isActive ? 'text-warning' : ''
+                }`}
               >
                 <Icon className={`w-4 h-4 flex-shrink-0 transition-transform group-hover:scale-110 ${
-                  isActive ? 'text-accent-500' : ''
+                  isActive ? 'text-accent-500' :
+                  item.highlight ? 'text-warning' : ''
                 }`} />
                 <span className="flex-1">{item.name}</span>
                 {isActive && (
                   <div className="w-1 h-1 rounded-full bg-accent-500" />
+                )}
+                {item.highlight && !isActive && (
+                  <div className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse" />
                 )}
               </Link>
             );
@@ -120,7 +130,7 @@ export default function DashboardLayout({ children }) {
         </nav>
 
         {/* User */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-white/[0.06]">
+        <div className="p-3 border-t border-white/[0.06] flex-shrink-0">
           <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.03]">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center text-surface-100 font-bold text-sm">
               {admin?.name?.[0]?.toUpperCase() || 'A'}
