@@ -3,257 +3,328 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════
-   QUTTR ADMIN — Global Styles
+   QUTTR ADMIN 2026 — Modern Design System
    ═══════════════════════════════════════════════════ */
 
 @layer base {
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #0a0a0a;
-  }
-
-  body {
-    background: #0a0a0a;
-    color: #ffffff;
-    font-family: var(--font-geist-sans), system-ui, sans-serif;
-    min-height: 100vh;
-  }
-
   * {
     box-sizing: border-box;
   }
 
-  /* Custom scrollbar */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0A0A0B;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #0A0A0B;
+    color: #FAFAFA;
+    font-family: var(--font-geist-sans), 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.011em;
+  }
+
+  /* Modern scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2b2b2b;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    transition: background 0.2s;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #FFD700;
+    background: rgba(255, 255, 255, 0.2);
   }
 
-  /* Remove input autofill background */
+  /* Autofill */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+    -webkit-box-shadow: 0 0 0 30px #141417 inset !important;
     -webkit-text-fill-color: white !important;
     caret-color: white;
   }
 
-  /* Selection color */
   ::selection {
-    background: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.25);
     color: white;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    outline: 2px solid rgba(255, 215, 0, 0.5);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
 /* ═══════════════════════════════════════════════════
-   COMPONENT CLASSES
+   COMPONENTS — 2026 Style
    ═══════════════════════════════════════════════════ */
 
 @layer components {
-  /* ─── Card ────────────────────────── */
+  /* ─── Cards ────────────────────────── */
   .card {
-    @apply bg-gradient-to-br from-dark-400 to-dark-500 
-           border border-white/5 rounded-2xl 
-           shadow-dark-lg backdrop-blur-sm;
+    @apply bg-surface-200/50 backdrop-blur-xl 
+           border border-white/[0.06] 
+           rounded-2xl shadow-elevation-2;
   }
 
-  .card-hover {
-    @apply hover:border-gold-500/30 hover:shadow-glow 
-           transition-all duration-300;
+  .card-interactive {
+    @apply card transition-all duration-300 ease-out
+           hover:bg-surface-200/80 hover:border-white/[0.1]
+           hover:shadow-elevation-3 hover:-translate-y-0.5
+           cursor-pointer;
   }
 
-  /* ─── Buttons ─────────────────────── */
+  /* ─── Glass panels ─────────────────── */
+  .glass {
+    @apply bg-white/[0.02] backdrop-blur-2xl 
+           border border-white/[0.06];
+  }
+
+  .glass-strong {
+    @apply bg-white/[0.05] backdrop-blur-3xl 
+           border border-white/[0.1];
+  }
+
+  /* ─── Buttons ──────────────────────── */
   .btn {
-    @apply inline-flex items-center justify-center 
-           px-6 py-3 rounded-xl font-bold text-sm
-           transition-all duration-200 
-           disabled:opacity-50 disabled:cursor-not-allowed
-           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900;
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2.5 rounded-xl font-medium text-sm
+           transition-all duration-200 ease-out
+           disabled:opacity-40 disabled:cursor-not-allowed
+           select-none whitespace-nowrap
+           active:scale-[0.98];
   }
 
-  .btn-gold {
-    @apply btn bg-gradient-gold text-dark-900 
-           shadow-gold hover:shadow-gold-lg 
-           focus:ring-gold-500;
+  .btn-primary {
+    @apply btn bg-white text-surface-100
+           hover:bg-white/90 hover:shadow-elevation-2
+           font-semibold;
   }
 
-  .btn-red {
-    @apply btn bg-gradient-red text-white 
-           shadow-red hover:shadow-red-lg 
-           focus:ring-secondary-500;
+  .btn-accent {
+    @apply btn bg-gradient-to-b from-accent-400 to-accent-600
+           text-surface-100 font-bold
+           shadow-glow-sm hover:shadow-glow-md;
+  }
+
+  .btn-brand {
+    @apply btn bg-gradient-to-b from-brand-500 to-brand-700
+           text-white font-semibold shadow-brand 
+           hover:shadow-brand-lg;
+  }
+
+  .btn-ghost {
+    @apply btn text-white/60 hover:text-white 
+           hover:bg-white/[0.06];
   }
 
   .btn-outline {
     @apply btn border border-white/10 text-white 
-           bg-dark-400 hover:bg-dark-300 
-           focus:ring-white/20;
+           bg-transparent hover:bg-white/[0.06] 
+           hover:border-white/20;
   }
 
-  .btn-ghost {
-    @apply btn text-white/70 hover:text-white 
-           hover:bg-white/5 
-           focus:ring-white/10;
+  .btn-icon {
+    @apply btn p-2 h-9 w-9 flex-shrink-0;
   }
 
-  /* ─── Inputs ──────────────────────── */
+  /* ─── Inputs ───────────────────────── */
   .input {
     @apply w-full px-4 py-3 
-           bg-dark-500 border border-white/10 
-           rounded-xl text-white placeholder-white/30 
-           focus:outline-none focus:border-gold-500 
-           focus:ring-2 focus:ring-gold-500/20 
+           bg-surface-300/50 border border-white/[0.08]
+           rounded-xl text-white placeholder-white/30
+           focus:outline-none focus:border-accent-500/50 
+           focus:bg-surface-300/80
+           focus:ring-4 focus:ring-accent-500/10
            transition-all duration-200;
   }
 
-  .input-error {
-    @apply border-error focus:border-error focus:ring-error/20;
-  }
-
-  /* ─── Labels ──────────────────────── */
+  /* ─── Labels ───────────────────────── */
   .label {
-    @apply block text-sm font-semibold text-white/80 mb-2;
+    @apply block text-xs font-semibold text-white/50 
+           mb-2 uppercase tracking-wider;
   }
 
   .label-hint {
-    @apply text-xs text-white/40 mt-1;
+    @apply text-xs text-white/30 mt-1.5;
   }
 
-  /* ─── Badges ──────────────────────── */
-  .badge {
-    @apply inline-flex items-center px-2.5 py-1 
-           rounded-full text-xs font-bold uppercase 
-           tracking-wider;
+  /* ─── Badges ───────────────────────── */
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1
+           rounded-lg text-2xs font-semibold
+           uppercase tracking-wider;
   }
 
-  .badge-success {
-    @apply badge bg-success/15 text-success border border-success/30;
+  .chip-success {
+    @apply chip bg-success/10 text-success border border-success/20;
   }
 
-  .badge-error {
-    @apply badge bg-error/15 text-error-light border border-error/30;
+  .chip-error {
+    @apply chip bg-error/10 text-error border border-error/20;
   }
 
-  .badge-warning {
-    @apply badge bg-warning/15 text-warning-light border border-warning/30;
+  .chip-warning {
+    @apply chip bg-warning/10 text-warning border border-warning/20;
   }
 
-  .badge-info {
-    @apply badge bg-info/15 text-info-light border border-info/30;
+  .chip-info {
+    @apply chip bg-info/10 text-info border border-info/20;
   }
 
-  .badge-gold {
-    @apply badge bg-gold-500/15 text-gold-500 border border-gold-500/30;
+  .chip-accent {
+    @apply chip bg-accent-500/10 text-accent-500 border border-accent-500/20;
   }
 
-  /* ─── Table ───────────────────────── */
-  .table-container {
-    @apply card overflow-hidden;
+  .chip-neutral {
+    @apply chip bg-white/5 text-white/60 border border-white/10;
   }
 
-  .table {
-    @apply w-full;
+  /* ─── Sidebar ──────────────────────── */
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2 
+           rounded-xl text-sm font-medium
+           text-white/60 hover:text-white 
+           hover:bg-white/[0.06]
+           transition-all duration-150 group;
   }
 
-  .table thead {
-    @apply bg-dark-500;
+  .nav-link-active {
+    @apply text-white bg-white/[0.08]
+           shadow-inset-border;
   }
 
-  .table th {
-    @apply px-6 py-4 text-left text-xs font-bold 
-           text-white/60 uppercase tracking-wider;
-  }
-
-  .table tbody tr {
-    @apply border-t border-white/5 hover:bg-white/[0.02] 
-           transition-colors;
-  }
-
-  .table td {
-    @apply px-6 py-4 text-sm text-white/90;
-  }
-
-  /* ─── Sidebar ─────────────────────── */
-  .sidebar-link {
-    @apply flex items-center gap-3 px-4 py-3 
-           rounded-xl text-white/60 
-           hover:text-white hover:bg-white/5 
-           transition-all duration-200;
-  }
-
-  .sidebar-link-active {
-    @apply text-gold-500 bg-gold-500/10 
-           border border-gold-500/20;
-  }
-
-  /* ─── Glass effect ────────────────── */
-  .glass {
-    @apply bg-white/[0.03] backdrop-blur-xl 
-           border border-white/10;
-  }
-
-  /* ─── Gradient text ───────────────── */
-  .text-gradient-gold {
-    @apply bg-gradient-gold bg-clip-text text-transparent;
-  }
-
-  .text-gradient-red {
-    @apply bg-gradient-red bg-clip-text text-transparent;
-  }
-
-  /* ─── Loading states ──────────────── */
-  .skeleton {
-    @apply bg-gradient-to-r from-dark-400 via-dark-300 to-dark-400 
-           bg-[length:200%_100%] animate-shimmer rounded-lg;
-  }
-
-  /* ─── Stat card ───────────────────── */
+  /* ─── Data Cards ───────────────────── */
   .stat-card {
-    @apply card card-hover p-6 relative overflow-hidden;
-  }
-
-  .stat-value {
-    @apply text-3xl font-black text-white mt-2;
+    @apply card p-6 relative overflow-hidden group;
   }
 
   .stat-label {
-    @apply text-xs font-bold text-white/50 
+    @apply text-2xs font-semibold text-white/40 
            uppercase tracking-widest;
+  }
+
+  .stat-value {
+    @apply text-4xl font-bold tracking-tight text-white mt-2;
+  }
+
+  .stat-change-positive {
+    @apply text-success text-sm font-semibold;
+  }
+
+  .stat-change-negative {
+    @apply text-error text-sm font-semibold;
+  }
+
+  /* ─── Command Palette ──────────────── */
+  .cmd-item {
+    @apply flex items-center gap-3 px-3 py-2.5 
+           rounded-lg text-sm text-white/80
+           hover:bg-white/[0.06] cursor-pointer
+           transition-colors;
+  }
+
+  /* ─── Typography ───────────────────── */
+  .text-display {
+    @apply text-4xl font-bold tracking-tight text-white;
+  }
+
+  .text-heading {
+    @apply text-2xl font-semibold tracking-tight text-white;
+  }
+
+  .text-title {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .text-body {
+    @apply text-sm text-white/70;
+  }
+
+  .text-caption {
+    @apply text-xs text-white/50;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500 
+           bg-clip-text text-transparent;
+  }
+
+  /* ─── Skeleton loader ──────────────── */
+  .skeleton {
+    @apply bg-gradient-to-r from-surface-300 via-surface-400 to-surface-300
+           bg-[length:200%_100%] animate-shimmer rounded-lg;
+  }
+
+  /* ─── Divider ──────────────────────── */
+  .divider {
+    @apply h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent;
   }
 }
 
 /* ═══════════════════════════════════════════════════
-   UTILITY CLASSES
+   UTILITIES
    ═══════════════════════════════════════════════════ */
 
 @layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  .mesh-bg {
+    background-image: 
+      radial-gradient(at 15% 20%, rgba(230, 57, 70, 0.08) 0px, transparent 50%),
+      radial-gradient(at 85% 80%, rgba(255, 215, 0, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(0, 149, 255, 0.03) 0px, transparent 50%);
   }
 
-  .text-shadow-glow {
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 
-  .border-gradient {
-    border-image: linear-gradient(135deg, #FFD700, #E63946) 1;
+  .noise {
+    position: relative;
+  }
+
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .animate-in {
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
+
+/* Delay classes for staggered animations */
+.delay-75 { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
