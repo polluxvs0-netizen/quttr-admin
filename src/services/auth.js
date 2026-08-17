@@ -2,17 +2,18 @@ import api, { setAuthToken, setAdminData, getAdminData } from './api';
 
 // ═══════════════════════════════════════════════════
 // QUTTR ADMIN — AUTHENTICATION SERVICE
+// Uses /admin/auth/* endpoints (NOT /auth/*)
 // ═══════════════════════════════════════════════════
 
 export const authService = {
-  // ─── Step 1: Send OTP ─────────────────────────
+  // ─── Step 1: Send OTP to admin phone ─────────
   sendOTP: async (phone) => {
     try {
       const response = await api.post('/admin/auth/send-otp', { phone });
       return {
         success: true,
         message: response.data.message,
-        devOTP: response.data.devOTP, // dev only
+        devOTP: response.data.devOTP,
         expiresInMinutes: response.data.expiresInMinutes,
       };
     } catch (error) {
@@ -23,7 +24,7 @@ export const authService = {
     }
   },
 
-  // ─── Step 2: Verify OTP ───────────────────────
+  // ─── Step 2: Verify OTP ──────────────────────
   verifyOTP: async (phone, otp) => {
     try {
       const response = await api.post('/admin/auth/verify-otp', {
@@ -43,7 +44,7 @@ export const authService = {
     }
   },
 
-  // ─── Step 3: Verify Password → Get JWT ──────
+  // ─── Step 3: Verify Password → Get JWT ─────
   login: async (phone, password) => {
     try {
       const response = await api.post('/admin/auth/login', {
@@ -52,8 +53,6 @@ export const authService = {
       });
 
       const { token, admin } = response.data;
-
-      // Save to localStorage
       setAuthToken(token);
       setAdminData(admin);
 
@@ -71,7 +70,7 @@ export const authService = {
     }
   },
 
-  // ─── Verify current token ─────────────────────
+  // ─── Verify current token ────────────────────
   verifyToken: async () => {
     try {
       const response = await api.get('/admin/auth/verify');
@@ -87,7 +86,7 @@ export const authService = {
     }
   },
 
-  // ─── Logout ───────────────────────────────────
+  // ─── Logout ──────────────────────────────────
   logout: async () => {
     try {
       await api.post('/admin/auth/logout');
@@ -97,14 +96,14 @@ export const authService = {
     window.location.href = '/login';
   },
 
-  // ─── Check if authenticated ───────────────────
+  // ─── Check if authenticated ──────────────────
   isAuthenticated: () => {
     if (typeof window === 'undefined') return false;
     const token = localStorage.getItem('quttr_admin_token');
     return !!token;
   },
 
-  // ─── Get current admin ────────────────────────
+  // ─── Get current admin ───────────────────────
   getCurrentAdmin: () => {
     return getAdminData();
   },
